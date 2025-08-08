@@ -3,6 +3,8 @@ from pydantic import BaseModel
 import joblib
 import os
 
+from .utils import clean_text
+
 from pathlib import Path
 
 
@@ -23,5 +25,6 @@ class FeedbackRequest(BaseModel):
 # Prediction endpoint
 @app.post("/predict")
 def predict(feedback: FeedbackRequest):
-    prediction = model.predict([feedback.text])[0]
+    cleaned = clean_text(feedback.text)
+    prediction = model.predict([cleaned])[0]
     return {"label": prediction}
