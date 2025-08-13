@@ -47,7 +47,7 @@ jobs:
 
     - name: Push Docker image
       run: |
-        docker push feedback-api:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/feedback-api:latest
 
     - name: Set up kubectl
       uses: azure/setup-kubectl@v3
