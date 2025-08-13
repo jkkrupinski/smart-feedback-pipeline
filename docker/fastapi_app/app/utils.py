@@ -16,6 +16,7 @@ def clean_text(text: str) -> str:
     doc = nlp(text)
 
     # Lemmatize and remove stopwords
-    tokens = [token.lemma_ for token in doc if not token.is_stop and not token.is_punct]
+    tokens = [token.lemma_ for token in doc
+              if not token.is_stop and not token.is_punct]
 
     return " ".join(tokens)
