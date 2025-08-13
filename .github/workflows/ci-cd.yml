@@ -28,8 +28,13 @@ jobs:
     - name: Run lint
       run: flake8 .
 
-    - name: Run tests
-      run: python -m pytest -v
+    - name: Create dummy model for CI
+      run: |
+        mkdir -p models
+        python scripts/create_dummy_model.py
+
+    - name: Run tests with pytest (dummy model)
+      run: USE_DUMMY_MODEL=true python -m pytest -v
 
     - name: Build Docker image
       run: docker build -t feedback-api -f ./docker/fastapi_app/Dockerfile .

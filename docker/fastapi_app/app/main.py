@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
+import os
 
 from .utils import clean_text
 
@@ -9,8 +10,11 @@ from pathlib import Path
 
 app = FastAPI()
 
-# Load model
-MODEL_PATH = Path("models/model.pkl")
+USE_DUMMY = os.getenv("USE_DUMMY_MODEL", "false").lower() == "true"
+
+model_path = "models/model_dummy.pkl" if USE_DUMMY else "models/model.pkl"
+
+MODEL_PATH = Path(model_path)
 if not MODEL_PATH.exists():
     raise FileNotFoundError("You must train the model first!")
 
