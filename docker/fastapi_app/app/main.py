@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
-import os
 
 from .utils import clean_text
 
@@ -21,6 +20,7 @@ model = joblib.load(MODEL_PATH)
 # Define the structure of input data
 class FeedbackRequest(BaseModel):
     text: str
+
 
 # Prediction endpoint
 @app.post("/predict")
