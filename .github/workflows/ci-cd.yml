@@ -37,7 +37,7 @@ jobs:
       run: USE_DUMMY_MODEL=true python -m pytest -v
 
     - name: Build Docker image
-      run: docker build -t feedback-api -f ./docker/fastapi_app/Dockerfile .
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/feedback-api:latest -f ./docker/fastapi_app/Dockerfile .
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v2
